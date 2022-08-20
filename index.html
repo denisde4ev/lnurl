@@ -17,14 +17,14 @@ var db = {
 
 var db_Paperize = async function(str) { // paper with unknown length
 	var r;
-	var rand = localStorage._custom_rand_ || (Math.random()*1e5+1|0);
+	var rand = localStorage._custom_rand_ || (Math.random()*6e4+1|0);
 	console.log('starting with rand='+rand);
 	for (let i=rand;--i;) {
 		if (r=db[await hash(str+i)]||db[await hash(i+str)]) return r;
 	}
 	document.write('still loading...<br>');
 	i=rand-5; // must be just 2 missed, but just in case use 5 rehashes.
-	while (++i<1e5+10) {
+	while (++i<6e4+10) {
 		if (r=db[await hash(str+i)]||db[await hash(i+str)]) return r;
 	}
 	document.write('still loading, this is taking longer than usual...<br>');
