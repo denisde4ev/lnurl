@@ -42,7 +42,7 @@ str=str.replace(/(\/+index.html)?\/*(#|$)/,'#');  //fix*/
 if (/^\d|\d$/.test(str)) str=`{${str}}`; // enshure digits won't colaps with i
 
 setTimeout(_=>{
-	document.write('loading...<br>')
+	document.write('<pre>loading...<br>')
 },0);
 let a=(await db_Paperize(str));
 document.write('redirecting...<br>');
