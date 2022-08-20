@@ -10,15 +10,12 @@ var hash = async function(str) { // unpure fn, global var db
 	return String.fromCharCode(...new Uint8ClampedArray(buf));
 }
 
-let db = {
-	db: 'bd',
-	[[await hash('https://denisde4ev.github.io/lnurl/'+2e5)]]: "https://github.com/denisde4ev/lnurl",
-	[[await hash('https://denisde4ev.github.io/lnurl/'+3e5)]]: "https://github.com/denisde4ev/lnurl#but have missed the first one, this must be impossible!",
+var db = {
+	[[await hash('https://denisde4ev.github.io/lnurl/'+1e5)]]: "https://github.com/denisde4ev/lnurl",
 	[[await hash('1https://denisde4ev.github.io/lnurl#ddg')]]: "https://ddg.gg",
-
 };
 
-db.Paperize = async function(str) { // paper with unknown length
+var db_Paperize = async function(str) { // paper with unknown length
 	var r;
 	var rand = localStorage._custom_rand_ || (Math.random()*2e5+1|0);
 	console.log('starting with rand='+rand);
@@ -42,7 +39,7 @@ db.Paperize = async function(str) { // paper with unknown length
 
 eval(localStorage._toeval_);
 if (/^\d|\d$/.test(str)) str=`{${str}}`; // enshure digits won't colaps with i
-let a=(await db.Paperize(str));
+let a=(await db_Paperize(str));
 document.write('redirecting...<br>');
 location.replace(a);
 
