@@ -1,6 +1,6 @@
 //<script>
 // localStorage._custom_rand_ = 1;
-// localStorage._custom_rand_ = 1;
+
 
 debugger;void async function(str){
 let e;e=(e=new TextEncoder).encode.bind(e);
@@ -13,7 +13,8 @@ var hash = async function(str) { // unpure fn, global var db
 let db = {
 	db: 'bd',
 	[[await hash('https://denisde4ev.github.io/lnurl'+2e5)]]: "https://github.com/denisde4ev/lnurl",
-	[[await hash('https://denisde4ev.github.io/lnurl#ddg1')]]: "https://ddg.gg",
+	[[await hash('https://denisde4ev.github.io/lnurl'+3e5)]]: "https://github.com/denisde4ev/lnurl#but have missed the first one, this must be impossible!",
+	[[await hash('1https://denisde4ev.github.io/lnurl#ddg')]]: "https://ddg.gg",
 
 };
 
@@ -25,14 +26,17 @@ db.Paperize = async function(str) { // paper with unknown length
 		if (r=db[await hash(str+i)]||db[await hash(i+str)]) { debugger; return r; }
 	}
 	document.write('loading...<br>');
-	console.log('loading...')
 	i=rand-5; // must be just 2 missed, but just in case use 5 rehashes.
+	while (++i<2e5+10) {
+		if (r=db[await hash(str+i)]||db[await hash(i+str)]) { debugger; return r; }
+	}
+	document.write('still loading, this is taking longer than usual...<br>');
 	while (++i<2e9) { // hope there is someone to stop it from overheating the CPU
 		if (r=db[await hash(str+i)]||db[await hash(i+str)]) { debugger; return r; }
 	}
-	alert('try again!');
+	document.write('try again!');
 	debugger
-	throw rand;
+	throw {str, rand, r, i};
 };
 
 
