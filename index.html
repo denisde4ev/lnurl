@@ -12,8 +12,8 @@ var hash = async function(str) { // unpure fn, global var db
 
 let db = {
 	db: 'bd',
-	[[await hash('https://denisde4ev.github.io/lnurl'+2e5)]]: "https://github.com/denisde4ev/lnurl",
-	[[await hash('https://denisde4ev.github.io/lnurl'+3e5)]]: "https://github.com/denisde4ev/lnurl#but have missed the first one, this must be impossible!",
+	[[await hash('https://denisde4ev.github.io/lnurl/'+2e5)]]: "https://github.com/denisde4ev/lnurl",
+	[[await hash('https://denisde4ev.github.io/lnurl/'+3e5)]]: "https://github.com/denisde4ev/lnurl#but have missed the first one, this must be impossible!",
 	[[await hash('1https://denisde4ev.github.io/lnurl#ddg')]]: "https://ddg.gg",
 
 };
