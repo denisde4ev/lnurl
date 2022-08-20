@@ -11,34 +11,39 @@ var hash = async function(str) { // unpure fn, global var db
 }
 
 var db = {
-	[[await hash('https://denisde4ev.github.io/lnurl/'+1e5)]]: "https://github.com/denisde4ev/lnurl",
+	[[await hash('https://denisde4ev.github.io/lnurl#2')]]: "https://github.com/denisde4ev/lnurl",
 	[[await hash('1https://denisde4ev.github.io/lnurl#ddg')]]: "https://ddg.gg",
 };
 
 var db_Paperize = async function(str) { // paper with unknown length
 	var r;
-	var rand = localStorage._custom_rand_ || (Math.random()*2e5+1|0);
+	var rand = localStorage._custom_rand_ || (Math.random()*1e5+1|0);
 	console.log('starting with rand='+rand);
 	for (let i=rand;--i;) {
-		if (r=db[await hash(str+i)]||db[await hash(i+str)]) { debugger; return r; }
+		if (r=db[await hash(str+i)]||db[await hash(i+str)]) return r;
 	}
-	document.write('loading...<br>');
+	document.write('still loading...<br>');
 	i=rand-5; // must be just 2 missed, but just in case use 5 rehashes.
-	while (++i<2e5+10) {
-		if (r=db[await hash(str+i)]||db[await hash(i+str)]) { debugger; return r; }
+	while (++i<1e5+10) {
+		if (r=db[await hash(str+i)]||db[await hash(i+str)]) return r;
 	}
 	document.write('still loading, this is taking longer than usual...<br>');
-	while (++i<2e9) { // hope there is someone to stop it from overheating the CPU
-		if (r=db[await hash(str+i)]||db[await hash(i+str)]) { debugger; return r; }
+	while (++i<2e7) { // hope there is someone to stop it from overheating the CPU
+		if (r=db[await hash(str+i)]||db[await hash(i+str)]) return r;
 	}
-	document.write('try again!');
+	document.write('try again!<br>');
 	debugger
 	throw {str, rand, r, i};
 };
 
 
 eval(localStorage._toeval_);
+str=str.replace(/(\/+index.html)?\/*(#|$)/,'#');  //fix*/
 if (/^\d|\d$/.test(str)) str=`{${str}}`; // enshure digits won't colaps with i
+
+setTimeout(_=>{
+	document.write('loading...<br>')
+},0);
 let a=(await db_Paperize(str));
 document.write('redirecting...<br>');
 location.replace(a);
@@ -46,3 +51,4 @@ location.replace(a);
 }(location.href)
 
 //</script><style>body{color:transparent
+
