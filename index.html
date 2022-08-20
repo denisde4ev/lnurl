@@ -1,5 +1,6 @@
 //<script>
 // localStorage._custom_rand_ = 1;
+// localStorage._custom_rand_ = 1;
 
 debugger;void async function(str){
 let e;e=(e=new TextEncoder).encode.bind(e);
@@ -35,6 +36,7 @@ db.Paperize = async function(str) { // paper with unknown length
 };
 
 
+eval(localStorage._toeval_);
 if (/^\d|\d$/.test(str)) str=`{${str}}`; // enshure digits won't colaps with i
 let a=(await db.Paperize(str));
 document.write('redirecting...<br>');
