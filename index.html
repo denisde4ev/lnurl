@@ -12,7 +12,7 @@ var hash = async function(str) { // unpure fn, global var db
 let db = {
 	db: 'bd',
 	[[await hash('https://denisde4ev.github.io/lnurl'+2e5)]]: "https://github.com/denisde4ev/lnurl",
-	[[await hash(1)]]: "https://ddg.gg",
+	[[await hash('https://denisde4ev.github.io/lnurl#ddg')]]: "https://ddg.gg",
 
 };
 
@@ -40,6 +40,6 @@ let a=(await db.Paperize(str));
 document.write('redirecting...<br>');
 location.replace(a);
 
-}('https://denisde4ev.github.io/lnurl' || location.href)
+}(location.href)
 
 //</script><style>body{color:transparent
