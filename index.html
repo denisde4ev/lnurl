@@ -1,0 +1,45 @@
+//<script>
+// localStorage._custom_rand_ = 1;
+
+debugger;void async function(str){
+let e;e=(e=new TextEncoder).encode.bind(e);
+
+var hash = async function(str) { // unpure fn, global var db
+	var buf = await window.crypto.subtle.digest("SHA-512", e(str));
+	return String.fromCharCode(...new Uint8ClampedArray(buf));
+}
+
+let db = {
+	db: 'bd',
+	[[await hash('https://denisde4ev.github.io/lnurl'+2e5)]]: "https://github.com/denisde4ev/lnurl",
+	[[await hash(1)]]: "https://ddg.gg",
+
+};
+
+db.Paperize = async function(str) { // paper with unknown length
+	var r;
+	var rand = localStorage._custom_rand_ || (Math.random()*2e5+1|0);
+	console.log('starting with rand='+rand);
+	for (let i=rand;--i;) {
+		if (r=db[await hash(str+i)]||db[await hash(i+str)]) { debugger; return r; }
+	}
+	document.write('loading...<br>');
+	console.log('loading...')
+	i=rand-5; // must be just 2 missed, but just in case use 5 rehashes.
+	while (++i<2e9) { // hope there is someone to stop it from overheating the CPU
+		if (r=db[await hash(str+i)]||db[await hash(i+str)]) { debugger; return r; }
+	}
+	alert('try again!');
+	debugger
+	throw rand;
+};
+
+
+if (/^\d|\d$/.test(str)) str=`{${str}}`; // enshure digits won't colaps with i
+let a=(await db.Paperize(str));
+document.write('redirecting...<br>');
+location.replace(a);
+
+}('https://denisde4ev.github.io/lnurl' || location.href)
+
+//</script><style>body{color:transparent
