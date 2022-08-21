@@ -45,7 +45,10 @@ setTimeout(_=>{
 	document.write('<pre>loading...<br>')
 },0);
 let a=(await db_Paperize(str));
-document.write('redirecting...<br>');
+document.write(`<link
+media=(prefers-color-scheme:dark
+href=data:,*{color-scheme:dark
+rel=stylesheet>redirecting...<br>`);
 location.replace(a);
 
 }(location.href)
